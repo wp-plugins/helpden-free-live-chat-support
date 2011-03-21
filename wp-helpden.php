@@ -15,7 +15,7 @@ register_deactivation_hook(__FILE__, 'helpden_deactivation');
 
     if (is_admin()) {
 	add_action('admin_menu', 'helpden_admin_menu');
-        add_action( 'admin_init', 'helpden_api_settings' );
+        add_action( 'admin_menu', 'helpden_api_settings' );
     }
 
 function helpden_admin_menu() {
