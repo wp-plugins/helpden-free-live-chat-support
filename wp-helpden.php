@@ -19,7 +19,7 @@ register_deactivation_hook(__FILE__, 'helpden_deactivation');
     }
 
 function helpden_admin_menu() {
-	add_options_page('Helpden', 'Helpden', 'administrator', __FILE__, 'helpden_options_page');
+	add_options_page('Helpden', 'Helpden', 'administrator', __FILE__, 'helpden-options-page');
 }
 
 function helpden_options_page() {
