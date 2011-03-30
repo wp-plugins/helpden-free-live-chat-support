@@ -1,4 +1,6 @@
-=== Plugin Name ===
+=== HelpDen Free Live Support Chat
+
+ ===
 
 Contributors: Manas Kanti dey
 Tags: free live chat, free livechat, live chat, live chat software, live support, online support, customer help, customer support, help desk, helpdesk, live support, customer service, plugin, chat, helped
@@ -27,3 +29,10 @@ Requires a FREE account at www.helpden.com
 2. Get your HelpDen ID
 3. Brand your Live Support System (requires upgrade)
 4. Simple options to place the support icon on your WordPress site.
+
+== Changelog ==
+     
+
+     Version Date       Changes
+
+     1.0.2   2011/03/29 Permission bug fix
