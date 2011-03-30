@@ -28,7 +28,7 @@ Requires a FREE account at www.helpden.com
 3. Brand your Live Support System (requires upgrade)
 4. Simple options to place the support icon on your WordPress site.
 
-== Contributors/Changelog ==
+== Changelog ==
      
 
      Version Date       Changes
