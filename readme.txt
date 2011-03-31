@@ -37,6 +37,8 @@ This version fixes permissions issue
 == Changelog ==
      
 
-     Version Date       Changes
+= 1.0.2 =
+* Permission bug fix
 
-     1.0.2   2011/03/29 Permission bug fix
+= 1.0.1 =
+* Original Release
