@@ -30,7 +30,9 @@ Requires a FREE account at www.helpden.com
 
 == Upgrade Notice ==
 
-Version 1.0.2
+= 1.0.2 =
+
+This version fixes permissions issue
 
 == Changelog ==
      
