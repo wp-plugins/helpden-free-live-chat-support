@@ -27,7 +27,8 @@ function helpden_options_page() {
 	<div class="wrap">
 		<h2>HelpDen Options</h2>
         <p>To find your HelpDen id please login to your HelpDen Dashboard and then go to "Account Management"</p>
-		<form method="post" action="options.php">';
+		<div style="color:Red;display:none" id="helpden_div">Wrong HelpDen ID</div>
+		<form method="post" action="options.php" onsubmit="return checkHelpDenId()">';
 			wp_nonce_field('update-options');
 			 echo '
 			<table class="form-table">
@@ -38,7 +39,7 @@ function helpden_options_page() {
 					<td>';
 					if ($setting['type']=='selectbox') {
 						$str = explode(",",$setting['option']);
-						echo '<select name="'.$setting['name'].'">';
+						echo '<select name="'.$setting['name'].'" >';
 						for($i=0;$i<count($str);$i++)
 						{	
 							$selected="";
@@ -53,7 +54,7 @@ function helpden_options_page() {
 						if (get_option($setting['name'])==1) { echo 'checked="checked" />'; } else { echo ' />'; }
 						echo 'No <input type="'.$setting['type'].'" name="'.$setting['name'].'" value="0" ';
 						if (get_option($setting['name'])==0) { echo 'checked="checked" />'; } else { echo ' />'; }
-					} else { echo '<input type="'.$setting['type'].'" name="'.$setting['name'].'" value="'.get_option($setting['name']).'" />'; }
+					} else { echo '<input type="'.$setting['type'].'" name="'.$setting['name'].'" id="'.$setting['id'].'" value="'.get_option($setting['name']).'" />'; }
 					echo ' (<em>'.$setting['hint'].'</em>)</td></tr>';
 				}
 			
@@ -65,7 +66,20 @@ function helpden_options_page() {
 			}
 			echo '" /><p class="submit"><input type="submit" class="button-primary" value="Save Changes" /></p>
 		</form>';
-	echo '</div>';
+	echo '</div>	<script type="text/javascript">
+		function checkHelpDenId(){
+		   var id = document.getElementById("helpden_id").value;
+		   if (id == "" || id.length !=10 ) {
+				document.getElementById("helpden_div").style.display="block";
+				return false;
+		   }
+		   else
+		   {
+				document.getElementById("helpden_div").style.display="none";
+				return true;
+		   }
+	   }
+   </script>';
 }
 
 function helpden_settings_list() {
@@ -73,6 +87,7 @@ function helpden_settings_list() {
 		array(
 			'display' => 'HelpDen ID',
 			'name'    => 'helpden_id',
+			'id'      => 'helpden_id',
 			'value'   => '',
 			'type'    => 'textbox',
             'hint'    => 'Enter your HelpDen id'
