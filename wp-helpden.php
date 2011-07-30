@@ -3,7 +3,7 @@
 Plugin Name: HelpDen Free Live Support Chat
 Plugin URI: http://www.helpden.com/add-ons.php
 Description: Allows you to add live chat support to your WordPress site in a few clicks.
-Version: 1.0.1
+Version: 1.0.3
 Author: Manas Kanti dey
 Author URI: http://www.helpden.com/
 */
@@ -14,12 +14,12 @@ register_activation_hook(__FILE__, 'helpden_activation');
 register_deactivation_hook(__FILE__, 'helpden_deactivation');
 
     if (is_admin()) {
-	add_action('admin_menu', 'helpden_admin_menu');
-        add_action( 'admin_menu', 'helpden_api_settings' );
+        add_action( 'admin_init', 'helpden_api_settings' );
+		add_action('admin_menu',  'helpden_admin_menu');
     }
 
 function helpden_admin_menu() {
-	add_options_page('Helpden', 'Helpden', 'administrator', __FILE__, 'helpden_options_page');
+	add_options_page('Helpden', 'Helpden', 8,'wordpresshelpden', 'helpden_options_page');
 }
 
 function helpden_options_page() {
@@ -27,7 +27,8 @@ function helpden_options_page() {
 	<div class="wrap">
 		<h2>HelpDen Options</h2>
         <p>To find your HelpDen id please login to your HelpDen Dashboard and then go to "Account Management"</p>
-		<form method="post" action="options.php">';
+		<div style="color:Red;display:none" id="helpden_div">Wrong HelpDen ID</div>
+		<form method="post" action="options.php" onsubmit="return checkHelpDenId()">';
 			wp_nonce_field('update-options');
 			 echo '
 			<table class="form-table">
@@ -38,7 +39,7 @@ function helpden_options_page() {
 					<td>';
 					if ($setting['type']=='selectbox') {
 						$str = explode(",",$setting['option']);
-						echo '<select name="'.$setting['name'].'">';
+						echo '<select name="'.$setting['name'].'" >';
 						for($i=0;$i<count($str);$i++)
 						{	
 							$selected="";
@@ -53,7 +54,7 @@ function helpden_options_page() {
 						if (get_option($setting['name'])==1) { echo 'checked="checked" />'; } else { echo ' />'; }
 						echo 'No <input type="'.$setting['type'].'" name="'.$setting['name'].'" value="0" ';
 						if (get_option($setting['name'])==0) { echo 'checked="checked" />'; } else { echo ' />'; }
-					} else { echo '<input type="'.$setting['type'].'" name="'.$setting['name'].'" value="'.get_option($setting['name']).'" />'; }
+					} else { echo '<input type="'.$setting['type'].'" name="'.$setting['name'].'" id="'.$setting['id'].'" value="'.get_option($setting['name']).'" />'; }
 					echo ' (<em>'.$setting['hint'].'</em>)</td></tr>';
 				}
 			
@@ -65,7 +66,20 @@ function helpden_options_page() {
 			}
 			echo '" /><p class="submit"><input type="submit" class="button-primary" value="Save Changes" /></p>
 		</form>';
-	echo '</div>';
+	echo '</div>	<script type="text/javascript">
+		function checkHelpDenId(){
+		   var id = document.getElementById("helpden_id").value;
+		   if (id == "" || id.length !=10 ) {
+				document.getElementById("helpden_div").style.display="block";
+				return false;
+		   }
+		   else
+		   {
+				document.getElementById("helpden_div").style.display="none";
+				return true;
+		   }
+	   }
+   </script>';
 }
 
 function helpden_settings_list() {
@@ -73,6 +87,7 @@ function helpden_settings_list() {
 		array(
 			'display' => 'HelpDen ID',
 			'name'    => 'helpden_id',
+			'id'      => 'helpden_id',
 			'value'   => '',
 			'type'    => 'textbox',
             'hint'    => 'Enter your HelpDen id'
@@ -125,29 +140,20 @@ function helpden_redirect_template($template) {
 	return $template;
 }
 
-function helpden_settings_link($links) {
-$settings_link = '<a href="options-general.php?page=wordpress-helpden/wp-helpden.php">Settings</a>';
-array_unshift($links, $settings_link);
-return $links;
-}
-$plugin = plugin_basename(__FILE__);
-add_filter("plugin_action_links_$plugin", 'helpden_settings_link' );
-
 
 add_action('wp_footer', 'helpden_wp_footer');
 function helpden_wp_footer() {
     $is_show = get_option('helpden_show_code');
-	$helpden_code = get_option('helpden_code');
     if($is_show==1)
 	{
-		$buffer = '<script type="text/javascript" src="http://helpden.com/client/helpden.js"></script>
+		$buffer = '<script type="text/javascript" src="https://helpden.com/client/helpden.js"></script>
 <style type="text/css" media="screen, projection">
-  @import url(http://helpden.com/client/helpden.css);
+  @import url(https://helpden.com/client/helpden.css);
 </style>
 <script type="text/javascript">
 	Helpden.init({
 	  dropboxID:   "'.get_option('helpden_id').'",
-	  url:         "http://helpden.com/code.php",
+	  url:         "https://helpden.com/code.php",
 	  tabID:       "support",
 	  tabPosition: "'.get_option('helpden_position').'"
 	});

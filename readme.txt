@@ -4,7 +4,7 @@ Contributors: Manas Kanti dey
 Tags: free live chat, free livechat, live chat, live chat software, live support, online support, customer help, customer support, help desk, helpdesk, live support, customer service, plugin, chat, helped
 Requires at least: 2.0
 Tested up to: 3.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 
 HelpDen - Live Support Chat. This plugin integrates HelpDen with WordPress - an application for online live customer support.
 
@@ -30,12 +30,14 @@ Requires a FREE account at www.helpden.com
 
 == Upgrade Notice ==
 
-= 1.0.2 =
+= 1.0.3 =
 
 This version fixes permissions issue
 
 == Changelog ==
      
+= 1.0.3 =
+* SSL support
 
 = 1.0.2 =
 * Permission bug fix
