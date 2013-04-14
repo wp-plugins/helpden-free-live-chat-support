@@ -31,7 +31,7 @@ Requires a FREE account at www.helpden.com
 == Upgrade Notice ==
 
 = 1.1 =
-Updated Version
+*Updated Version
 
 
 == Changelog ==
