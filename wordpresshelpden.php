@@ -3,7 +3,7 @@
 Plugin Name: HelpDen Free Live Support Chat
 Plugin URI: http://www.helpden.com/add-ons.php
 Description: Allows you to add live chat support to your WordPress site in a few clicks.
-Version: 1.0.3
+Version: 1.1
 Author: Manas Kanti dey
 Author URI: http://www.helpden.com/
 */
@@ -146,14 +146,14 @@ function helpden_wp_footer() {
     $is_show = get_option('helpden_show_code');
     if($is_show==1)
 	{
-		$buffer = '<script type="text/javascript" src="https://helpden.com/client/helpden.js"></script>
+		$buffer = '<script type="text/javascript" src="http://helpden.com/chat/js/helpden.js"></script>
 <style type="text/css" media="screen, projection">
-  @import url(https://helpden.com/client/helpden.css);
+  @import url(http://helpden.com/chat/css/chat.css);
 </style>
 <script type="text/javascript">
 	Helpden.init({
 	  dropboxID:   "'.get_option('helpden_id').'",
-	  url:         "https://helpden.com/code.php",
+	  url:         "http://helpden.com/chat/mycode.json",
 	  tabID:       "support",
 	  tabPosition: "'.get_option('helpden_position').'"
 	});
